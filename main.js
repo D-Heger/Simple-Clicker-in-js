@@ -9,7 +9,7 @@ var gameData = {
 
 function makeMoney() {
     gameData.money += gameData.moneyPerClick
-    document.getElementById("balance").innerHTML = gameData.money + " Money made";
+    document.getElementById("balance").innerHTML = gameData.money + " Money made"
 
 }
 
@@ -18,8 +18,8 @@ function buyMoneyPerClick() {
         gameData.money -= gameData.moneyPerClickCost
         gameData.moneyPerClick += 1
         gameData.moneyPerClickCost *= 1.5
-        document.getElementById("balance").innerHTML = gameData.money + " Money made";
-        document.getElementById("perClickUpgrade").innerHTML = "Grow another Finger (Current Count:" + gameData.moneyPerClick + ") Cost: " + gameData.moneyPerClickCost;
+        document.getElementById("balance").innerHTML = gameData.money + " Money made"
+        document.getElementById("perClickUpgrade").innerHTML = "Grow another Finger (Current Count:" + gameData.moneyPerClick + ") Cost: " + gameData.moneyPerClickCost
     }
 }
 
