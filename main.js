@@ -15,7 +15,7 @@ function updateText(id, content) {
 
 function makeMoney() {
     gameData.money += gameData.moneyPerClick;
-    updateText("balance", gameData.money + " Money made");
+    updateText("balance", format(gameData.money, "scientific") + " Money made");
 }
 
 function buyMoneyPerClick() {
@@ -23,8 +23,8 @@ function buyMoneyPerClick() {
         gameData.money -= gameData.moneyPerClickCost;
         gameData.moneyPerClick += 1;
         gameData.moneyPerClickCost = (gameData.moneyPerClickCost * 1.5);
-        updateText("balance", gameData.money + " Money made");
-        updateText("upgradeButton", "Grow another Finger (Current Count: " + gameData.moneyPerClick + ") Cost: " + gameData.moneyPerClickCost)
+        updateText("balance", format(gameData.money, "scientific") + " Money made");
+        updateText("upgradeButton", "Grow another Finger (Current Count: " + format(gameData.moneyPerClick, "scientific") + ") Cost: " + format(gameData.moneyPerClickCost, "scientific"))
     }
 }
 
@@ -33,7 +33,7 @@ var mainGameLoop = window.setInterval(function() {
     diff = Date.now() - gameData.lastTick;
     gameData.lastTick = Date.now();
     gameData.money += gameData.moneyPerClick * (diff / 1000);
-    updateText("balance", gameData.money + " Money made");
+    updateText("balance", format(gameData.money, "scientific") + " Money made");
 }, 1000)
 
 //This saves the game every 15sec
@@ -43,7 +43,10 @@ var saveGameLoop = window.setInterval(function() {
 
 function format(number, type) {
     let exponent = Math.floor(Math.log10(number));
-    let matissa = number / Math.pow(10, exponent);
+    let mantissa = number / Math.pow(10, exponent);
+    if (exponent < 3) return number.toFixed(1);
+    if (type == "scientific") return mantissa.toFixed(2) + "e" + exponent;
+    if (type == "engineering") return (Math.pow(10, exponent % 3) * mantissa).toFixed(2) + "e" + (Math.floor(exponent / 3) * 3);
 }
 
 //Set Values if save doesn't include them
