@@ -1,5 +1,3 @@
-var saveGame = localStorage.getItem('moneyMakerSave');
-
 var gameData = {
     money: 0,
     moneyPerClick: 1,
@@ -55,3 +53,9 @@ if (typeof saveGame.money !== "undefined") gameData.money = saveGame.money;
 if (typeof saveGame.moneyPerClick !== "undefined") gameData.moneyPerClick = saveGame.moneyPerClick;
 if (typeof saveGame.moneyPerClickCost !== "undefined") gameData.money = saveGame.moneyPerClickCost;
 if (typeof saveGame.lastTick !== "undefined") gameData.lastTick = saveGame.lastTick;
+
+//Load the game
+var saveGame = JOSON.parse(localStorage.getItem('moneyMakerSave'));
+if (saveGame !== null) {
+    gameData = saveGame
+}
