@@ -24,7 +24,7 @@ function buyMoneyPerClick() {
         gameData.moneyPerClick += 1;
         gameData.moneyPerClickCost = (gameData.moneyPerClickCost * 1.5);
         updateText("balance", format(gameData.money, "scientific") + " Money made");
-        updateText("upgradeButton", "Grow another Finger (Current Count: " + format(gameData.moneyPerClick, "scientific") + ") Cost: " + format(gameData.moneyPerClickCost, "scientific"))
+        updateText("perClickUpgrade", "Current Finger Count: " + format(gameData.moneyPerClick, "scientific") + " | Cost: " + format(gameData.moneyPerClickCost, "scientific") + " Money");
     }
 }
 
@@ -34,6 +34,7 @@ var mainGameLoop = window.setInterval(function() {
     gameData.lastTick = Date.now();
     gameData.money += gameData.moneyPerClick * (diff / 1000);
     updateText("balance", format(gameData.money, "scientific") + " Money made");
+    updateText("perClickUpgrade", "Current Finger Count: " + format(gameData.moneyPerClick, "scientific") + " | Cost: " + format(gameData.moneyPerClickCost, "scientific") + " Money");
 }, 1000)
 
 //This saves the game every 15sec
@@ -49,7 +50,7 @@ function format(number, type) {
     if (type == "engineering") return (Math.pow(10, exponent % 3) * mantissa).toFixed(2) + "e" + (Math.floor(exponent / 3) * 3);
 }
 
-//Set Values if save doesn't include them
+//Set Values if save includes them
 if (typeof saveGame.money !== "undefined") gameData.money = saveGame.money;
 if (typeof saveGame.moneyPerClick !== "undefined") gameData.moneyPerClick = saveGame.moneyPerClick;
 if (typeof saveGame.moneyPerClickCost !== "undefined") gameData.money = saveGame.moneyPerClickCost;
