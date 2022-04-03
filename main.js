@@ -12,10 +12,12 @@ var gameData = {
 
 function setScientific() {
     gameData.exponentRule = "scientific"
+    updateText("scroll-text", "Scientific Notation enabled!")
 }
 
 function setEngineering() {
     gameData.exponentRule = "engineering"
+    updateText("scroll-text", "Engineering Notation enabled!")
 }
 
 function updateText(id, content) {
@@ -25,6 +27,7 @@ function updateText(id, content) {
 function makeMoney() {
     gameData.money += gameData.moneyPerClick;
     updateText("balance", format(gameData.money, gameData.exponentRule) + " Money made");
+    updateText("scroll-text", "Money made!")
 }
 
 function buyMoneyPerClick() {
@@ -34,6 +37,7 @@ function buyMoneyPerClick() {
         gameData.moneyPerClickCost = (gameData.moneyPerClickCost * 1.5);
         updateText("balance", format(gameData.money, gameData.exponentRule) + " Money made");
         updateText("perClickUpgrade", "Current Printer Count: " + format(gameData.moneyPerClick, gameData.exponentRule) + " | Cost: " + format(gameData.moneyPerClickCost, gameData.exponentRule) + " Money");
+        updateText("scroll-text", "Printer added!")
     }
 }
 
@@ -49,7 +53,13 @@ var mainGameLoop = window.setInterval(function() {
 //This saves the game every 15sec
 var saveGameLoop = window.setInterval(function() {
     localStorage.setItem("moneyMakerSave", JSON.stringify(gameData))
+    updateText("scroll-text", "Game Saved!")
 }, 15000)
+
+function saveGameButton() {
+    localStorage.setItem("moneyMakerSave", JSON.stringify(gameData))
+    updateText("scroll-text", "Game Saved!")
+}
 
 function format(number, string) {
     let exponent = Math.floor(Math.log10(number));
@@ -59,7 +69,6 @@ function format(number, string) {
     if (string == "engineering") return (Math.pow(10, exponent % 3) * mantissa).toFixed(2) + "e" + (Math.floor(exponent / 3) * 3);
 }
 
-
 //Load the game
 var saveGame = JSON.parse(localStorage.getItem("moneyMakerSave"))
 if (saveGame !== null) {
@@ -68,4 +77,5 @@ if (saveGame !== null) {
     if (typeof saveGame.moneyPerClick !== "undefined") gameData.moneyPerClick = saveGame.moneyPerClick;
     if (typeof saveGame.moneyPerClickCost !== "undefined") gameData.money = saveGame.moneyPerClickCost;
     if (typeof saveGame.lastTick !== "undefined") gameData.lastTick = saveGame.lastTick;
+    gameData = saveGame;
 }
