@@ -1,5 +1,6 @@
 {
     "html.format.indentInnerHtml": true,
     "html.format.endWithNewline": true,
-    "html.format.indentHandlebars": true
+    "html.format.indentHandlebars": true,
+    "html.format.enable": true
 }
