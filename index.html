@@ -20,8 +20,6 @@
         </div>
     </div>
     <div class="scrollMenu">
-        <button class="button" id="scientificSetting" onclick="setScientific()">Set scientific Notation</button>
-        <button class="button" id="engineeringSetting" onclick="setEngineering()">Set engineering Notation</button>
         <button class="button" id="saveButton" onclick="saveGameButton()">Save Game manually</button>
         <button class="button" id="deleteButton" onclick="deleteSave()">Delete save file</button>
     </div>
@@ -35,7 +33,11 @@
     </div>
     <div class="scrollMenu">
         <p class="Text" id="prestigeUpgrade">Reset Counter: 0</p>
-        <p class="Text" id="nextBoost">Next Reset available at: 1000000000000000000</p>
+        <p class="Text" id="nextPrestige">Next Reset available at: </p>
+        <p class="Text" id="currentPrestigeBonus">Current Bonus: 0%</p>
+    </div>
+    <div class="scrollMenu">
+        <button class="button" id="prestigeButton button" onclick="getPrestige()">Reset for 2% Bonus</button>
     </div>
     <script src="./main.js" charset="uft-8" type="text/javascript"></script>
 </body>
